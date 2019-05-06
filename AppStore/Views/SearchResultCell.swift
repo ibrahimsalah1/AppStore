@@ -75,9 +75,16 @@ class SearchResultCell: UICollectionViewCell {
         let overAllStackView = VerticalStackView(arrangedSubviews: [infoTopStackView, screenshotStackView], spacing: 16)
         addSubview(overAllStackView)
         overAllStackView.fillSuperview(padding: .init(top: 16, left: 16, bottom: 16, right: 16))
+        
     }
-    
+
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+
+    func configure(result: Result){
+        appNameLabel.text = result.trackName
+        appCatLabel.text = result.primaryGenreName
+        appRateLabel.text = "Rating: \(result.averageUserRating ?? 0)"
     }
 }

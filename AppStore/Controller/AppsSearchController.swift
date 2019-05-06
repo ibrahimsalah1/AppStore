@@ -10,10 +10,12 @@ import UIKit
 
 class AppsSearchController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     fileprivate let cellId = "AppsSearchCell"
+    fileprivate var serachResults = [Result]()
     override func viewDidLoad() {
         super.viewDidLoad()
         collectionView.backgroundColor = .white
         collectionView.register(SearchResultCell.self, forCellWithReuseIdentifier: cellId)
+        fetchSearchResult()
     }
     
     init(){
@@ -29,11 +31,26 @@ class AppsSearchController: UICollectionViewController, UICollectionViewDelegate
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 5
+        return serachResults.count
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! SearchResultCell
+        cell.configure(result: serachResults[indexPath.item])
         return cell
+    }
+}
+
+extension AppsSearchController{
+    func fetchSearchResult (){
+        Serivce.shared.fetchApps { (results,error)  in
+            if let error = error {
+                print("can not fetch data", error)
+            }
+            self.serachResults = results
+            DispatchQueue.main.async {
+                self.collectionView.reloadData()
+            }
+        }
     }
 }

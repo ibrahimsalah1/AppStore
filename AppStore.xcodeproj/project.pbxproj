@@ -10,12 +10,14 @@
 		7D386A27227E8B2200E9964E /* SearchResultCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D386A26227E8B2200E9964E /* SearchResultCell.swift */; };
 		7D623FF4227F956100AAB171 /* UIView+Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D623FF3227F956100AAB171 /* UIView+Layout.swift */; };
 		7D7A5B6E227FAA1F00BB6E71 /* VerticalStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D7A5B6D227FAA1F00BB6E71 /* VerticalStackView.swift */; };
+		7D7A5B71227FBD8900BB6E71 /* SearchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D7A5B70227FBD8900BB6E71 /* SearchResult.swift */; };
 		7DA41F41227CACB7008D9E79 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA41F40227CACB7008D9E79 /* AppDelegate.swift */; };
 		7DA41F43227CACB7008D9E79 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA41F42227CACB7008D9E79 /* ViewController.swift */; };
 		7DA41F46227CACB7008D9E79 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7DA41F44227CACB7008D9E79 /* Main.storyboard */; };
 		7DA41F48227CACBB008D9E79 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7DA41F47227CACBB008D9E79 /* Assets.xcassets */; };
 		7DA41F4B227CACBB008D9E79 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7DA41F49227CACBB008D9E79 /* LaunchScreen.storyboard */; };
 		7DA41F53227CAD2D008D9E79 /* BaseTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA41F52227CAD2D008D9E79 /* BaseTabBarController.swift */; };
+		7DC4CEB3227FD46D006C580C /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DC4CEB2227FD46D006C580C /* Service.swift */; };
 		7DC7F837227E7F1A0058E2D8 /* AppsSearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DC7F836227E7F1A0058E2D8 /* AppsSearchController.swift */; };
 /* End PBXBuildFile section */
 
@@ -23,6 +25,7 @@
 		7D386A26227E8B2200E9964E /* SearchResultCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultCell.swift; sourceTree = "<group>"; };
 		7D623FF3227F956100AAB171 /* UIView+Layout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Layout.swift"; sourceTree = "<group>"; };
 		7D7A5B6D227FAA1F00BB6E71 /* VerticalStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerticalStackView.swift; sourceTree = "<group>"; };
+		7D7A5B70227FBD8900BB6E71 /* SearchResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResult.swift; sourceTree = "<group>"; };
 		7DA41F3D227CACB6008D9E79 /* AppStore.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AppStore.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7DA41F40227CACB7008D9E79 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7DA41F42227CACB7008D9E79 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -31,6 +34,7 @@
 		7DA41F4A227CACBB008D9E79 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7DA41F4C227CACBB008D9E79 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7DA41F52227CAD2D008D9E79 /* BaseTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTabBarController.swift; sourceTree = "<group>"; };
+		7DC4CEB2227FD46D006C580C /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
 		7DC7F836227E7F1A0058E2D8 /* AppsSearchController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppsSearchController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -53,13 +57,13 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
-		7D1F1F61227E7D90007AE02B /* Controllers */ = {
+		7D1F1F61227E7D90007AE02B /* Controller */ = {
 			isa = PBXGroup;
 			children = (
 				7DA41F52227CAD2D008D9E79 /* BaseTabBarController.swift */,
 				7DC7F836227E7F1A0058E2D8 /* AppsSearchController.swift */,
 			);
-			path = Controllers;
+			path = Controller;
 			sourceTree = "<group>";
 		};
 		7D623FF2227F954100AAB171 /* Helpers */ = {
@@ -69,6 +73,14 @@
 				7D7A5B6D227FAA1F00BB6E71 /* VerticalStackView.swift */,
 			);
 			path = Helpers;
+			sourceTree = "<group>";
+		};
+		7D7A5B6F227FBD6A00BB6E71 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				7D7A5B70227FBD8900BB6E71 /* SearchResult.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		7DA41F34227CACB6008D9E79 = {
@@ -90,9 +102,11 @@
 		7DA41F3F227CACB6008D9E79 /* AppStore */ = {
 			isa = PBXGroup;
 			children = (
+				7DC4CEB1227FD444006C580C /* Service */,
 				7D623FF2227F954100AAB171 /* Helpers */,
+				7D7A5B6F227FBD6A00BB6E71 /* Model */,
 				7D144ABC227E8A9D00CF8C75 /* Views */,
-				7D1F1F61227E7D90007AE02B /* Controllers */,
+				7D1F1F61227E7D90007AE02B /* Controller */,
 				7DA41F40227CACB7008D9E79 /* AppDelegate.swift */,
 				7DA41F42227CACB7008D9E79 /* ViewController.swift */,
 				7DA41F44227CACB7008D9E79 /* Main.storyboard */,
@@ -101,6 +115,14 @@
 				7DA41F4C227CACBB008D9E79 /* Info.plist */,
 			);
 			path = AppStore;
+			sourceTree = "<group>";
+		};
+		7DC4CEB1227FD444006C580C /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				7DC4CEB2227FD46D006C580C /* Service.swift */,
+			);
+			path = Service;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -176,8 +198,10 @@
 			files = (
 				7DA41F43227CACB7008D9E79 /* ViewController.swift in Sources */,
 				7DA41F41227CACB7008D9E79 /* AppDelegate.swift in Sources */,
+				7D7A5B71227FBD8900BB6E71 /* SearchResult.swift in Sources */,
 				7D623FF4227F956100AAB171 /* UIView+Layout.swift in Sources */,
 				7DA41F53227CAD2D008D9E79 /* BaseTabBarController.swift in Sources */,
+				7DC4CEB3227FD46D006C580C /* Service.swift in Sources */,
 				7DC7F837227E7F1A0058E2D8 /* AppsSearchController.swift in Sources */,
 				7D386A27227E8B2200E9964E /* SearchResultCell.swift in Sources */,
 				7D7A5B6E227FAA1F00BB6E71 /* VerticalStackView.swift in Sources */,
