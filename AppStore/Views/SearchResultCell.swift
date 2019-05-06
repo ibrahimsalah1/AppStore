@@ -8,6 +8,7 @@
 
 import UIKit
 import SDWebImage
+import Cosmos
 
 class SearchResultCell: UICollectionViewCell {
     
@@ -24,20 +25,32 @@ class SearchResultCell: UICollectionViewCell {
     
     let appNameLabel : UILabel = {
         let name = UILabel()
-        name.text = "APP NAME"
+        name.font = UIFont.systemFont(ofSize: 13, weight: .semibold)
         return name
     }()
     
     let appCatLabel : UILabel = {
         let category = UILabel()
-        category.text = "APP Category"
+        category.font = UIFont.systemFont(ofSize: 12)
+        category.textColor = .lightGray
         return category
     }()
     
-    let appRateLabel : UILabel = {
-        let rate = UILabel()
-        rate.text = "29.2M"
-        return rate
+    let appRateView : CosmosView = {
+        let cosmosView = CosmosView()
+        cosmosView.settings.starSize = 12
+        cosmosView.settings.textColor = .lightGray
+        cosmosView.settings.updateOnTouch = false
+        cosmosView.settings.fillMode = .half
+        cosmosView.settings.starMargin = 0
+        cosmosView.settings.filledColor = UIColor.gray
+        
+        // Set the border color of an empty star
+        cosmosView.settings.emptyBorderColor = UIColor.gray
+        
+        // Set the border color of a filled star
+        cosmosView.settings.filledBorderColor = UIColor.gray
+        return cosmosView
     }()
     
     let getButton : UIButton = {
@@ -69,7 +82,7 @@ class SearchResultCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        let infoTopStackView = UIStackView(arrangedSubviews: [appIconImageView, VerticalStackView(arrangedSubviews: [appNameLabel, appCatLabel, appRateLabel]), getButton])
+        let infoTopStackView = UIStackView(arrangedSubviews: [appIconImageView, VerticalStackView(arrangedSubviews: [appNameLabel, appCatLabel, appRateView],spacing: 4), getButton])
         infoTopStackView.alignment = .center
         infoTopStackView.spacing = 12
         
@@ -91,7 +104,12 @@ class SearchResultCell: UICollectionViewCell {
     func configure(result: Result){
         appNameLabel.text = result.trackName
         appCatLabel.text = result.primaryGenreName
-        appRateLabel.text = "Rating: \(result.averageUserRating ?? 0)"
+        appRateView.rating = Double(result.averageUserRating ?? 0.0)
+        if (result.userRatingCount ?? 0) > 1000 {
+            appRateView.text = "\((result.userRatingCount ?? 0) / 1000)k"
+        } else {
+            appRateView.text = "\((result.userRatingCount ?? 0))"
+        }
         if let iconImageUrl = URL(string: result.artworkUrl100){
             appIconImageView.sd_setImage(with: iconImageUrl , completed: nil)
         }

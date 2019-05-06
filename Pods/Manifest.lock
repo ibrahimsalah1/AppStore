@@ -1,18 +1,22 @@
 PODS:
+  - Cosmos (19.0.3)
   - SDWebImage (5.0.1):
     - SDWebImage/Core (= 5.0.1)
   - SDWebImage/Core (5.0.1)
 
 DEPENDENCIES:
+  - Cosmos
   - SDWebImage
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
+    - Cosmos
     - SDWebImage
 
 SPEC CHECKSUMS:
+  Cosmos: a6fb17284281fa12cf4c85c2efecd440a215ec44
   SDWebImage: 27dd2c9ea07a2252f94557c9fbb6105ee94b74c9
 
-PODFILE CHECKSUM: b28e6352d3199c72c7baeb685eda6a2c7304cbb0
+PODFILE CHECKSUM: 6186d5dc6e344359da444c23f04f16119467ce04
 
 COCOAPODS: 1.6.1

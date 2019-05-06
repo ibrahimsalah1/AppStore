@@ -21,6 +21,7 @@ class AppsSearchController: UICollectionViewController, UICollectionViewDelegate
     }
     
     fileprivate func setupSearchBar(){
+        searchController.searchBar.placeholder = "App Store"
         definesPresentationContext = true
         navigationItem.searchController = searchController
         navigationItem.hidesSearchBarWhenScrolling = false
