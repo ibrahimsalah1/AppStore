@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SDWebImage
 
 class SearchResultCell: UICollectionViewCell {
     
@@ -14,8 +15,10 @@ class SearchResultCell: UICollectionViewCell {
         let image = UIImageView()
         image.widthAnchor.constraint(equalToConstant: 64).isActive = true
         image.heightAnchor.constraint(equalToConstant: 64).isActive = true
-        image.backgroundColor = .red
-        image.layer.cornerRadius = 12
+        image.layer.cornerRadius = 14
+        image.layer.borderWidth = 0.3
+        image.layer.borderColor = UIColor(white: 0.5, alpha: 0.5).cgColor
+        image.clipsToBounds = true
         return image
     }()
     
@@ -39,8 +42,7 @@ class SearchResultCell: UICollectionViewCell {
     
     let getButton : UIButton = {
         let button = UIButton(type: .system)
-        button.setTitle("Get", for: .normal)
-        button.setTitleColor(.blue, for: .normal)
+        button.setTitle("GET", for: .normal)
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
         button.widthAnchor.constraint(equalToConstant: 80).isActive = true
         button.heightAnchor.constraint(equalToConstant: 32).isActive = true
@@ -56,8 +58,12 @@ class SearchResultCell: UICollectionViewCell {
         
     func createScreenshotImageView() -> UIImageView{
         let image = UIImageView()
-        image.backgroundColor = .blue
-        image.layer.cornerRadius = 8
+        //image.backgroundColor = .blue
+        image.layer.cornerRadius = 5
+        image.clipsToBounds = true
+        image.layer.borderWidth = 0.3
+        image.layer.borderColor = UIColor(white: 0.5, alpha: 0.5).cgColor
+        image.contentMode = .scaleToFill
         return image
     }
     override init(frame: CGRect) {
@@ -86,5 +92,26 @@ class SearchResultCell: UICollectionViewCell {
         appNameLabel.text = result.trackName
         appCatLabel.text = result.primaryGenreName
         appRateLabel.text = "Rating: \(result.averageUserRating ?? 0)"
+        if let iconImageUrl = URL(string: result.artworkUrl100){
+            appIconImageView.sd_setImage(with: iconImageUrl , completed: nil)
+        }
+        if result.screenshotUrls.count > 0 {
+            if let screen1 = URL(string: result.screenshotUrls[0]){
+                screenshot1ImageView.sd_setImage(with: screen1 , completed: nil)
+            }
+        }
+     
+        if result.screenshotUrls.count > 1{
+            if let screen2 = URL(string: result.screenshotUrls[1]){
+                screenshot2ImageView.sd_setImage(with: screen2 , completed: nil)
+            }
+        }
+        
+        if result.screenshotUrls.count > 2 {
+            if let screen3 = URL(string: result.screenshotUrls[2]){
+                screenshot3ImageView.sd_setImage(with: screen3 , completed: nil)
+            }
+        }
+        
     }
 }

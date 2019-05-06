@@ -8,14 +8,40 @@
 
 import UIKit
 
-class AppsSearchController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
+class AppsSearchController: UICollectionViewController, UICollectionViewDelegateFlowLayout, UISearchBarDelegate {
     fileprivate let cellId = "AppsSearchCell"
+    fileprivate let searchController = UISearchController(searchResultsController: nil)
     fileprivate var serachResults = [Result]()
     override func viewDidLoad() {
         super.viewDidLoad()
         collectionView.backgroundColor = .white
         collectionView.register(SearchResultCell.self, forCellWithReuseIdentifier: cellId)
         fetchSearchResult()
+        setupSearchBar()
+    }
+    
+    fileprivate func setupSearchBar(){
+        definesPresentationContext = true
+        navigationItem.searchController = searchController
+        navigationItem.hidesSearchBarWhenScrolling = false
+        searchController.dimsBackgroundDuringPresentation = false
+        searchController.searchBar.delegate = self
+    }
+    var timer : Timer?
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        timer?.invalidate()
+        timer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false, block: { (_) in
+            Serivce.shared.fetchApps(serachTerm: searchText) { (results, error) in
+                if let error = error {
+                    print("can not fetch data", error)
+                }
+                self.serachResults = results
+                DispatchQueue.main.async {
+                    self.collectionView.reloadData()
+                }
+            }
+        })
+        
     }
     
     init(){
@@ -27,7 +53,7 @@ class AppsSearchController: UICollectionViewController, UICollectionViewDelegate
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: view.frame.width, height: 350)
+        return CGSize(width: view.frame.width, height: 300)
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -43,7 +69,7 @@ class AppsSearchController: UICollectionViewController, UICollectionViewDelegate
 
 extension AppsSearchController{
     func fetchSearchResult (){
-        Serivce.shared.fetchApps { (results,error)  in
+        Serivce.shared.fetchApps(serachTerm: "facebook") { (results,error)  in
             if let error = error {
                 print("can not fetch data", error)
             }

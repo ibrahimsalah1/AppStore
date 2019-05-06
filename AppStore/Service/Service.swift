@@ -12,8 +12,8 @@ class Serivce {
     
     
     // fetch search results
-    func fetchApps(completion: @escaping ([Result], Error?) -> ()){
-        let urlString = "https://itunes.apple.com/search?term=facebook&entity=software"
+    func fetchApps(serachTerm: String,completion: @escaping ([Result], Error?) -> ()){
+        let urlString = "https://itunes.apple.com/search?term=\(serachTerm)&entity=software"
         guard let url = URL(string: urlString) else {
             return
         }
