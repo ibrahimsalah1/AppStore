@@ -60,7 +60,6 @@
 				04BA8B809361B4D389BC6EF0 /* Pods-AppStore.debug.xcconfig */,
 				8ED28B6D60A5EE034C5E76CD /* Pods-AppStore.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -75,8 +74,8 @@
 		7D1F1F61227E7D90007AE02B /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				7D7EA3462280CA9C002B1649 /* Search */,
 				7DA41F52227CAD2D008D9E79 /* BaseTabBarController.swift */,
-				7DC7F836227E7F1A0058E2D8 /* AppsSearchController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -96,6 +95,14 @@
 				7D7A5B70227FBD8900BB6E71 /* SearchResult.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		7D7EA3462280CA9C002B1649 /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				7DC7F836227E7F1A0058E2D8 /* AppsSearchController.swift */,
+			);
+			path = Search;
 			sourceTree = "<group>";
 		};
 		7DA41F34227CACB6008D9E79 = {
