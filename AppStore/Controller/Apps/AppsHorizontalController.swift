@@ -1,0 +1,55 @@
+//
+//  AppsHorizontalController.swift
+//  AppStore
+//
+//  Created by Ibrahim Salah on 5/6/19.
+//  Copyright © 2019 Ibrahim Salah. All rights reserved.
+//
+
+import UIKit
+
+private let reuseIdentifier = "Cell"
+
+class AppsHorizontalController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        collectionView.backgroundColor = .white
+        collectionView.register(AppRowCell.self, forCellWithReuseIdentifier: reuseIdentifier)
+        if let layout = collectionViewLayout as? UICollectionViewFlowLayout {
+            layout.scrollDirection = .horizontal
+        }
+
+    }
+    init(){
+        super.init(collectionViewLayout: UICollectionViewFlowLayout())
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
+    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 10
+    }
+
+    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
+        return cell
+    }
+    
+    let topBottomSpacing: CGFloat = 12
+    let lineSpacing: CGFloat = 10
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return .init(width: view.frame.width - 48, height:( view.frame.height - ( (2 * lineSpacing) + (2 *   topBottomSpacing))) / 3)
+    }
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return lineSpacing
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return .init(top: topBottomSpacing, left: 16 , bottom: topBottomSpacing, right: 16)
+    }
+}
+

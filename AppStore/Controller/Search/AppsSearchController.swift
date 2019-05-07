@@ -16,7 +16,6 @@ class AppsSearchController: UICollectionViewController, UICollectionViewDelegate
         super.viewDidLoad()
         collectionView.backgroundColor = .white
         collectionView.register(SearchResultCell.self, forCellWithReuseIdentifier: cellId)
-        fetchSearchResult()
         setupSearchBar()
     }
     
@@ -65,19 +64,5 @@ class AppsSearchController: UICollectionViewController, UICollectionViewDelegate
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! SearchResultCell
         cell.configure(result: serachResults[indexPath.item])
         return cell
-    }
-}
-
-extension AppsSearchController{
-    func fetchSearchResult (){
-        Serivce.shared.fetchApps(serachTerm: "facebook") { (results,error)  in
-            if let error = error {
-                print("can not fetch data", error)
-            }
-            self.serachResults = results
-            DispatchQueue.main.async {
-                self.collectionView.reloadData()
-            }
-        }
     }
 }
