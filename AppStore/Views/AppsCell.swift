@@ -9,13 +9,7 @@
 import UIKit
 
 class AppsCell: UICollectionViewCell {
-    let titleLabel : UILabel = {
-        let label = UILabel()
-        label.text = "App Section"
-        label.font = UIFont.boldSystemFont(ofSize: 30)
-        return label
-        
-    }()
+    let titleLabel = UILabel(text: "App Section", font: .boldSystemFont(ofSize: 30))
     let appsHorizontalController = AppsHorizontalController()
     override init(frame: CGRect) {
         super.init(frame: frame)

@@ -10,7 +10,7 @@ import UIKit
 
 
 private let collectionHeaderCellId = "collectionHeaderCellId"
-class AppHeaderHorizontalControler: UICollectionViewController, UICollectionViewDelegateFlowLayout{
+class AppHeaderHorizontalControler: HorizontalSnappingController, UICollectionViewDelegateFlowLayout{
     
     var socialApps = [SocialApp]()
     override func viewDidLoad() {
@@ -18,19 +18,9 @@ class AppHeaderHorizontalControler: UICollectionViewController, UICollectionView
         
         collectionView.backgroundColor = .white
         collectionView.register(AppsPageHeaderCell.self, forCellWithReuseIdentifier: collectionHeaderCellId)
-        
-        if let layout = collectionViewLayout as? UICollectionViewFlowLayout{
-            layout.scrollDirection = .horizontal
-        }
+        collectionView.contentInset = .init(top: 0, left: 16, bottom: 0, right: 16)
     }
     
-    init(){
-        super.init(collectionViewLayout: UICollectionViewFlowLayout())
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return socialApps.count
@@ -46,8 +36,5 @@ class AppHeaderHorizontalControler: UICollectionViewController, UICollectionView
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return .init(width: view.frame.width - 46, height: view.frame.height)
     }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return .init(top: 0, left: 16, bottom: 0, right: 16)
-    }
+ 
 }

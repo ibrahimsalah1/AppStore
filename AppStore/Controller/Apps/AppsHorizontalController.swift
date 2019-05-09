@@ -10,25 +10,15 @@ import UIKit
 
 private let reuseIdentifier = "Cell"
 
-class AppsHorizontalController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
+class AppsHorizontalController: HorizontalSnappingController, UICollectionViewDelegateFlowLayout {
     var appsGroup: AppsGroup?
     override func viewDidLoad() {
         super.viewDidLoad()
         collectionView.backgroundColor = .white
         collectionView.register(AppRowCell.self, forCellWithReuseIdentifier: reuseIdentifier)
-        if let layout = collectionViewLayout as? UICollectionViewFlowLayout {
-            layout.scrollDirection = .horizontal
-        }
-
+        collectionView.contentInset = .init(top: 0, left: 16, bottom: 0, right: 16)
     }
-    init(){
-        super.init(collectionViewLayout: UICollectionViewFlowLayout())
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-
+  
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return appsGroup?.feed.results.count ?? 0
     }
@@ -53,7 +43,7 @@ class AppsHorizontalController: UICollectionViewController, UICollectionViewDele
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return .init(top: topBottomSpacing, left: 16 , bottom: topBottomSpacing, right: 16)
+        return .init(top: topBottomSpacing, left: 0 , bottom: topBottomSpacing, right: 0)
     }
 }
 
