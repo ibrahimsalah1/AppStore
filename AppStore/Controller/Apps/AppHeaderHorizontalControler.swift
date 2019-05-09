@@ -11,6 +11,8 @@ import UIKit
 
 private let collectionHeaderCellId = "collectionHeaderCellId"
 class AppHeaderHorizontalControler: UICollectionViewController, UICollectionViewDelegateFlowLayout{
+    
+    var socialApps = [SocialApp]()
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -31,12 +33,13 @@ class AppHeaderHorizontalControler: UICollectionViewController, UICollectionView
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        return socialApps.count
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let collectionHeaderCell = collectionView.dequeueReusableCell(withReuseIdentifier: collectionHeaderCellId, for: indexPath)
-
+        let collectionHeaderCell = collectionView.dequeueReusableCell(withReuseIdentifier: collectionHeaderCellId, for: indexPath) as! AppsPageHeaderCell
+        let socialApp =  socialApps[indexPath.item]
+        collectionHeaderCell.configure(socialApp: socialApp)
         return collectionHeaderCell
     }
     
@@ -45,6 +48,6 @@ class AppHeaderHorizontalControler: UICollectionViewController, UICollectionView
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return .init(top: 12, left: 16, bottom: 12, right: 16)
+        return .init(top: 0, left: 16, bottom: 0, right: 16)
     }
 }

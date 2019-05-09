@@ -11,10 +11,9 @@ import UIKit
 private let reuseIdentifier = "Cell"
 
 class AppsHorizontalController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
-
+    var appsGroup: AppsGroup?
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         collectionView.backgroundColor = .white
         collectionView.register(AppRowCell.self, forCellWithReuseIdentifier: reuseIdentifier)
         if let layout = collectionViewLayout as? UICollectionViewFlowLayout {
@@ -31,18 +30,23 @@ class AppsHorizontalController: UICollectionViewController, UICollectionViewDele
     }
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        return appsGroup?.feed.results.count ?? 0
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! AppRowCell
+        cell.nameLabel.text = appsGroup?.feed.results[indexPath.item].name ?? ""
+        cell.companyName.text = appsGroup?.feed.results[indexPath.item].artistName ?? ""
+        if let url = appsGroup?.feed.results[indexPath.item].artworkUrl100{
+            cell.imageView.sd_setImage(with:URL(string: url))
+        }
         return cell
     }
     
     let topBottomSpacing: CGFloat = 12
     let lineSpacing: CGFloat = 10
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return .init(width: view.frame.width - 48, height:( view.frame.height - ( (2 * lineSpacing) + (2 *   topBottomSpacing))) / 3)
+        return .init(width: view.frame.width - 48, height:( view.frame.height - ( (2 * lineSpacing) + (2 * topBottomSpacing))) / 3)
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return lineSpacing
