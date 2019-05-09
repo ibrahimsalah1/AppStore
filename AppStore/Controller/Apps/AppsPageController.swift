@@ -132,6 +132,11 @@ class AppsPageController: UICollectionViewController, UICollectionViewDelegateFl
         
         cell.titleLabel.text = groups[indexPath.item].feed.title
         cell.appsHorizontalController.appsGroup = groups[indexPath.row]
+        cell.appsHorizontalController.itemTappedHandler = { [weak self] (feedResult) in
+            let detailsController = AppDetailsController()
+            detailsController.navigationItem.title = feedResult.name
+            self?.navigationController?.pushViewController(detailsController, animated: true)
+        }
         cell.appsHorizontalController.collectionView.reloadData()
         return cell
     }

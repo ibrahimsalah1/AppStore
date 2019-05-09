@@ -12,6 +12,8 @@ private let reuseIdentifier = "Cell"
 
 class AppsHorizontalController: HorizontalSnappingController, UICollectionViewDelegateFlowLayout {
     var appsGroup: AppsGroup?
+    var itemTappedHandler: ((FeedResult)-> Void)?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         collectionView.backgroundColor = .white
@@ -44,6 +46,12 @@ class AppsHorizontalController: HorizontalSnappingController, UICollectionViewDe
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return .init(top: topBottomSpacing, left: 0 , bottom: topBottomSpacing, right: 0)
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if let feedResult = appsGroup?.feed.results[indexPath.row]{
+          itemTappedHandler?(feedResult)
+        }
     }
 }
 
