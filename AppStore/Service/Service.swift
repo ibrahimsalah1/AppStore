@@ -16,11 +16,15 @@ class Serivce {
         let urlString = "https://itunes.apple.com/search?term=\(serachTerm)&entity=software"
         genericFetchJSONData(urlString: urlString, completion: completion)
     }
-    
+    //https://itunes.apple.com/lookup
+    func fetchAppDetails(id:String, completion: @escaping (SearchResult?, Error?) -> ()){
+        let urlString = "https://itunes.apple.com/lookup?id=\(id)"
+        genericFetchJSONData(urlString: urlString, completion: completion)
+        
+    }
     func fetchGames(completion: @escaping (AppsGroup?, Error?) -> ()){
         let urlString = "https://rss.itunes.apple.com/api/v1/en/ios-apps/new-games-we-love/all/50/explicit.json"
-        fetchAppGroups(urlString: urlString, completion: completion)
-        
+        genericFetchJSONData(urlString: urlString, completion: completion)
     }
     
     func fetchTopFreeApps(completion: @escaping (AppsGroup?, Error?) -> ()){
