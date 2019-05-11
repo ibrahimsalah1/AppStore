@@ -31,6 +31,6 @@ class HorizontalPreviewScreenshotsController: HorizontalSnappingController, UICo
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return .init(width: 250, height: view.frame.height)
+        return .init(width: 200, height: view.frame.height)
     }
 }

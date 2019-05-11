@@ -10,7 +10,9 @@ import UIKit
 class AppDetailsController : UICollectionViewController, UICollectionViewDelegateFlowLayout{
     let detailsCellId = "detailsCell"
     let previewCellId = "previewCell"
+    let previewAndRatingCellId = "previewAndRatingCell"
     var appDetails: Result?
+    var appReview : Review?
     var appId: String!{
         didSet {
             Serivce.shared.fetchAppDetails(id: appId, completion: { (response, error) in
@@ -22,14 +24,26 @@ class AppDetailsController : UICollectionViewController, UICollectionViewDelegat
                     self.collectionView.reloadData()
                 }
             })
+            
+            Serivce.shared.fetchReview(id: appId) { (review, error) in
+                if let error = error {
+                     print("Can not fetch appReview data ", error)
+                }
+                self.appReview = review
+                DispatchQueue.main.async {
+                    self.collectionView.reloadData()
+                }
+            }
         }
     }
     override func viewDidLoad() {
         super.viewDidLoad()
         collectionView.backgroundColor = .white
         navigationItem.largeTitleDisplayMode = .never
+        collectionView.contentInset = .init(top: 20, left: 0, bottom: 20, right: 0)
         collectionView.register(AppDetailsCell.self, forCellWithReuseIdentifier: detailsCellId)
         collectionView.register(PreviewCell.self, forCellWithReuseIdentifier: previewCellId)
+        collectionView.register(ReviewAndRatingCell.self, forCellWithReuseIdentifier: previewAndRatingCellId)
     }
     
     init(){
@@ -42,7 +56,7 @@ class AppDetailsController : UICollectionViewController, UICollectionViewDelegat
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if appDetails != nil {
-            return 2
+            return 3
         } else {
             return 0
         }
@@ -54,11 +68,16 @@ class AppDetailsController : UICollectionViewController, UICollectionViewDelegat
                 cell.configure(app: app)
             }
             return cell
-        }else {
+        }else if indexPath.row == 1{
             let previewCell = collectionView.dequeueReusableCell(withReuseIdentifier: previewCellId , for: indexPath) as! PreviewCell
             previewCell.horizontalPreviewScreenshotsController.app = appDetails
             return previewCell
             
+        }
+        else {
+            let reviewAndRatingCell = collectionView.dequeueReusableCell(withReuseIdentifier: previewAndRatingCellId, for: indexPath) as! ReviewAndRatingCell
+            reviewAndRatingCell.horizontalReviewAndRatingControler.appReview = appReview
+            return reviewAndRatingCell
         }
         
 
@@ -75,8 +94,12 @@ class AppDetailsController : UICollectionViewController, UICollectionViewDelegat
             dummyCell.layoutIfNeeded()
             let estimatedHeight = dummyCell.systemLayoutSizeFitting(.init(width: view.frame.width, height: 1000))
             return .init(width: view.frame.width, height: estimatedHeight.height)
-        } else {
-            return .init(width: view.frame.width, height: 500)
+        } else if indexPath.row == 1 {
+            return .init(width: view.frame.width, height: 380)
+        }
+        
+        else{
+            return .init(width: view.frame.width, height: 260)
         }
         
     }

@@ -22,6 +22,12 @@ class Serivce {
         genericFetchJSONData(urlString: urlString, completion: completion)
         
     }
+    
+    func fetchReview(id:String,completion: @escaping ((Review?, Error?) -> Void)){
+         let urlString = "https://itunes.apple.com/rss/customerreviews/page=1/id=\(id)/sortby=mostrecent/json?l=en&cc=us"
+        genericFetchJSONData(urlString: urlString, completion: completion)
+    }
+    
     func fetchGames(completion: @escaping (AppsGroup?, Error?) -> ()){
         let urlString = "https://rss.itunes.apple.com/api/v1/en/ios-apps/new-games-we-love/all/50/explicit.json"
         genericFetchJSONData(urlString: urlString, completion: completion)

@@ -42,7 +42,7 @@ class AppDetailsCell : UICollectionViewCell{
         topStackView.spacing = 10
         let overAllStackView = VerticalStackView(arrangedSubviews: [topStackView, whatsNewLabel,versionLabel, releaseNotesLabel, lineView] , spacing:10)
         addSubview(overAllStackView)
-        overAllStackView.fillSuperview(padding: .init(top: 20 , left: 20, bottom: 0, right: 20))
+        overAllStackView.fillSuperview(padding: .init(top: 0 , left: 20, bottom: 0, right: 20))
     }
     
     func configure(app: Result){
