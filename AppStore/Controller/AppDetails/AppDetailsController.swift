@@ -101,7 +101,7 @@ class AppDetailsController : UICollectionViewController, UICollectionViewDelegat
         } else if indexPath.row == 1 {
             return .init(width: view.frame.width, height: 380)
         }
-        
+            
         else{
             return .init(width: view.frame.width, height: 260)
         }

@@ -17,7 +17,7 @@ class HorizontalPreviewAndRatingController: HorizontalSnappingController, UIColl
     override func viewDidLoad() {
         super.viewDidLoad()
         collectionView.backgroundColor = .white
-        collectionView.contentInset = .init(top: 10, left: 16, bottom: 0, right: 16)
+        collectionView.contentInset = .init(top: 10, left: 16, bottom: 0, right: 20)
         collectionView.register(RatingCell.self, forCellWithReuseIdentifier: cellId)
     }
     
