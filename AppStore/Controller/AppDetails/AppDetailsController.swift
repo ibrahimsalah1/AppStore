@@ -13,29 +13,8 @@ class AppDetailsController : UICollectionViewController, UICollectionViewDelegat
     let previewAndRatingCellId = "previewAndRatingCell"
     var appDetails: Result?
     var appReview : Review?
-    var appId: String!{
-        didSet {
-            Serivce.shared.fetchAppDetails(id: appId, completion: { (response, error) in
-                if let error = error {
-                    print("Can not fetch appdetails data ", error)
-                }
-                self.appDetails = response?.results.first
-                DispatchQueue.main.async {
-                    self.collectionView.reloadData()
-                }
-            })
-            
-            Serivce.shared.fetchReview(id: appId) { (review, error) in
-                if let error = error {
-                     print("Can not fetch appReview data ", error)
-                }
-                self.appReview = review
-                DispatchQueue.main.async {
-                    self.collectionView.reloadData()
-                }
-            }
-        }
-    }
+    let appId: String
+   
     override func viewDidLoad() {
         super.viewDidLoad()
         collectionView.backgroundColor = .white
@@ -44,9 +23,34 @@ class AppDetailsController : UICollectionViewController, UICollectionViewDelegat
         collectionView.register(AppDetailsCell.self, forCellWithReuseIdentifier: detailsCellId)
         collectionView.register(PreviewCell.self, forCellWithReuseIdentifier: previewCellId)
         collectionView.register(ReviewAndRatingCell.self, forCellWithReuseIdentifier: previewAndRatingCellId)
+        fetchData()
     }
     
-    init(){
+    fileprivate func fetchData () {
+        Serivce.shared.fetchAppDetails(id: appId, completion: { (response, error) in
+            if let error = error {
+                print("Can not fetch appdetails data ", error)
+            }
+            self.appDetails = response?.results.first
+            DispatchQueue.main.async {
+                self.collectionView.reloadData()
+            }
+        })
+        
+        Serivce.shared.fetchReview(id: appId) { (review, error) in
+            if let error = error {
+                print("Can not fetch appReview data ", error)
+            }
+            self.appReview = review
+            DispatchQueue.main.async {
+                self.collectionView.reloadData()
+            }
+        }
+    }
+    
+    // Dependancey injection
+    init(appId: String){
+        self.appId = appId
         super.init(collectionViewLayout: UICollectionViewFlowLayout())
     }
     
