@@ -46,7 +46,7 @@ class AppDetailsCell : UICollectionViewCell{
     }
     
     func configure(app: Result){
-        appImageIcon.sd_setImage(with: URL(string: app.artworkUrl512 , relativeTo: nil))
+        appImageIcon.sd_setImage(with: URL(string: app.artworkUrl512 ?? "" , relativeTo: nil))
         appNameLabel.text = app.trackName
         versionLabel.text = "Version \(app.version ?? "")"
         releaseNotesLabel.text = app.releaseNotes

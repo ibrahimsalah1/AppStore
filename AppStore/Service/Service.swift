@@ -11,6 +11,15 @@ class Serivce {
     static let shared =  Serivce() // singletone
     
     
+    //https://itunes.apple.com/search?term=a&offset=25&limit=20
+   
+    
+    // fetch search results
+    func fetchTracks(serachTerm: String, offset: Int, limit: Int ,completion: @escaping (SearchResult?, Error?) -> ()){
+        let urlString = "https://itunes.apple.com/search?term=\(serachTerm)&offset=\(offset)&limit=\(limit)"
+        genericFetchJSONData(urlString: urlString, completion: completion)
+    }
+    
     // fetch search results
     func fetchApps(serachTerm: String,completion: @escaping (SearchResult?, Error?) -> ()){
         let urlString = "https://itunes.apple.com/search?term=\(serachTerm)&entity=software"

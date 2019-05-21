@@ -67,7 +67,7 @@ class AppsSearchController: UICollectionViewController, UICollectionViewDelegate
     }
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let appId = String(serachResults[indexPath.item].trackId)
+        let appId = String(serachResults[indexPath.item].trackId ?? 0)
         let appDetailsController = AppDetailsController(appId: appId)
         navigationController?.pushViewController(appDetailsController, animated: true)
     }

@@ -110,23 +110,23 @@ class SearchResultCell: UICollectionViewCell {
         } else {
             appRateView.text = "\((result.userRatingCount ?? 0))"
         }
-        if let iconImageUrl = URL(string: result.artworkUrl100){
+        if let iconImageUrl = URL(string: result.artworkUrl100 ?? ""){
             appIconImageView.sd_setImage(with: iconImageUrl , completed: nil)
         }
-        if result.screenshotUrls.count > 0 {
-            if let screen1 = URL(string: result.screenshotUrls[0]){
+        if result.screenshotUrls!.count > 0 {
+            if let screen1 = URL(string: result.screenshotUrls![0]){
                 screenshot1ImageView.sd_setImage(with: screen1 , completed: nil)
             }
         }
      
-        if result.screenshotUrls.count > 1{
-            if let screen2 = URL(string: result.screenshotUrls[1]){
+        if result.screenshotUrls!.count > 1{
+            if let screen2 = URL(string: result.screenshotUrls![1]){
                 screenshot2ImageView.sd_setImage(with: screen2 , completed: nil)
             }
         }
         
-        if result.screenshotUrls.count > 2 {
-            if let screen3 = URL(string: result.screenshotUrls[2]){
+        if result.screenshotUrls!.count > 2 {
+            if let screen3 = URL(string: result.screenshotUrls![2]){
                 screenshot3ImageView.sd_setImage(with: screen3 , completed: nil)
             }
         }
