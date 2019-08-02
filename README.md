@@ -1,5 +1,5 @@
 # AppStore
-Using public API for Apple iTuens to create a Demo like AppStore
+Using public API for Apple iTunes to create a Demo like AppStore
 
 # Built using:
 
